@@ -105,7 +105,6 @@ const TrendingCard = memo(({item}) => (
       style={{
         position: 'absolute',
         zIndex: 999,
-        // top: 2,
         right: 15,
       }}>
       {item?.buying && (
@@ -129,16 +128,8 @@ const TrendingCard = memo(({item}) => (
     </View>
     <View style={{backgroundColor: '#F0F4F8', borderRadius: 15}}>
       <Image source={item.image} style={styles.trendingImage} />
-      <View
-        style={{
-          backgroundColor: '#fff',
-          marginVertical: 5,
-          marginHorizontal: 5,
-          padding: 5,
-          borderRadius: 10,
-          alignSelf: 'flex-start',
-        }}>
-        <Text style={{color: '#2959A3', fontSize: 12}}>MRP {item?.mrp}</Text>
+      <View style={styles.mrpDesign}>
+        <Text style={styles.mrpTxt}>MRP {item?.mrp}</Text>
       </View>
     </View>
     <View
@@ -146,23 +137,11 @@ const TrendingCard = memo(({item}) => (
         flexDirection: 'row',
         justifyContent: 'space-between',
       }}>
-      <View
-        style={{
-          backgroundColor: '#DFEDFA',
-          marginVertical: 5,
-          padding: 5,
-          borderRadius: 8,
-        }}>
-        <Text style={{color: '#2959A3'}}>Pack 30</Text>
+      <View style={styles.marginPack}>
+        <Text style={styles.marginPackText}>Pack 30</Text>
       </View>
-      <View
-        style={{
-          backgroundColor: '#DFEDFA',
-          marginVertical: 5,
-          padding: 5,
-          borderRadius: 8,
-        }}>
-        <Text style={{color: '#2959A3'}}>Margin {item?.margin}</Text>
+      <View style={styles.marginPack}>
+        <Text style={styles.marginPackText}>Margin {item?.margin}</Text>
       </View>
     </View>
 
@@ -191,12 +170,7 @@ const TrendingCard = memo(({item}) => (
         </Text>
       </TouchableOpacity>
     ) : (
-      <View
-        style={{
-          flexDirection: 'row',
-          justifyContent: 'space-between',
-          alignItems: 'center',
-        }}>
+      <View style={styles.headerText}>
         <TouchableOpacity
           style={{
             ...styles.addButton,
@@ -236,12 +210,7 @@ const FairDeal = () => {
     <SafeAreaView style={styles.container}>
       {/* Header for the app */}
       <ImageBackground style={styles.header} source={images.others.headImage}>
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-          }}>
+        <View style={styles.headerText}>
           <View>
             <Text style={styles.location}>Badshahpur</Text>
             <View style={{flexDirection: 'row', alignItems: 'center', gap: 5}}>
@@ -267,7 +236,7 @@ const FairDeal = () => {
           <View style={{flexDirection: 'row', alignItems: 'center', flex: 0.8}}>
             <Image
               source={images.icons.searchMagnifi}
-              style={{height: 24, width: 24, resizeMode: 'contain'}}
+              style={styles.searchIcons}
             />
             <TextInput placeholder="Search" style={styles.searchInput} />
           </View>
@@ -275,14 +244,10 @@ const FairDeal = () => {
             style={{
               flexDirection: 'row',
               gap: 10,
-              alignItems: 'center',
               flex: 0.1,
             }}>
-            <View style={{height: 17, width: 2, backgroundColor: '#E3E3E3'}} />
-            <Image
-              source={images.icons.mic}
-              style={{height: 24, width: 24, resizeMode: 'contain'}}
-            />
+            <View style={styles.separator} />
+            <Image source={images.icons.mic} style={styles.searchIcons} />
           </View>
         </View>
       </ImageBackground>
@@ -290,20 +255,19 @@ const FairDeal = () => {
       <ScrollView nestedScrollEnabled>
         {/* Explore categories */}
         <View style={styles.categoriesContainer}>
-          <View
-            style={{
-              flexDirection: 'row',
-              justifyContent: 'space-between',
-              alignItems: 'center',
-            }}>
+          <View style={styles.headerText}>
             <Text style={styles.sectionTitle}>Explore by Categories</Text>
-            <View style={{flexDirection: 'row', gap: 2}}>
-              <Text style={{...styles.sectionTitle, color: '#8B8C99'}}>
+            <View style={{flexDirection: 'row', gap: 1, marginRight: 8}}>
+              <Text
+                style={{
+                  ...styles.sectionTitle,
+                  color: '#8B8C99',
+                }}>
                 See All
               </Text>
               <Image
                 source={images.icons.arrowLeft}
-                style={{height: 24, width: 24, resizeMode: 'contain'}}
+                style={styles.searchIcons}
               />
             </View>
           </View>
@@ -341,6 +305,11 @@ const styles = StyleSheet.create({
     backgroundColor: '#e0f7ff',
     padding: 16,
   },
+  headerText: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   location: {
     fontSize: 20,
     fontWeight: 'bold',
@@ -349,6 +318,8 @@ const styles = StyleSheet.create({
     fontSize: 14,
     color: 'gray',
   },
+  separator: {height: 24, width: 2, backgroundColor: '#E3E3E3'},
+  searchIcons: {height: 24, width: 24, resizeMode: 'contain'},
   searchContainer: {
     marginTop: 10,
     backgroundColor: '#fff',
@@ -383,6 +354,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#F0F4F8',
     borderRadius: 15,
     alignItems: 'center',
+    // width: width / 3.4,
     // marginHorizontal: 1,
     marginRight: width / 30,
   },
@@ -439,6 +411,22 @@ const styles = StyleSheet.create({
   addButtonText: {
     fontWeight: 'bold',
   },
+  marginPack: {
+    backgroundColor: '#DFEDFA',
+    marginVertical: 5,
+    padding: 5,
+    borderRadius: 8,
+  },
+  marginPackText: {color: '#2959A3'},
+  mrpDesign: {
+    backgroundColor: '#fff',
+    marginVertical: 5,
+    marginHorizontal: 5,
+    padding: 5,
+    borderRadius: 10,
+    alignSelf: 'flex-start',
+  },
+  mrpTxt: {color: '#2959A3', fontSize: 12},
 });
 
 export default FairDeal;
